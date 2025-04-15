@@ -1,1 +1,5 @@
-print("this is reducer 1")
+import sys
+
+
+for line in sys.stdin:
+	print(line.strip())
