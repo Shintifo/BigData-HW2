@@ -17,6 +17,8 @@ source .venv/bin/activate
 pip install -r requirements.txt
 venv-pack -o .venv.tar.gz
 
+bash prepare_data.sh
+
 FILES=($(hdfs dfs -ls /data | awk '{print $NF}' | tail -n +2 | head -n 100))
 
 for hdfs_file in "${FILES[@]}"
