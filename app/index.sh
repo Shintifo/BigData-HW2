@@ -10,7 +10,7 @@ MAPPER2="mapreduce/mapper2.py"
 REDUCER2="mapreduce/reducer2.py"
 
 echo "Creating Cassandra storage..."
-python app.py
+python3 app.py
 
 echo "Cleaning up temporary data..."
 hdfs dfs -rm -r -f $HDFS_TMP_BASE
@@ -18,7 +18,7 @@ hdfs dfs -rm -r -f $HDFS_TMP_BASE
 
 # Pipeline 1
 echo "Starting Pipeline 1..."
-mapred streaming \
+hadoop jar "$HADOOP_HOME"/share/hadoop/tools/lib/hadoop-streaming-*.jar\
   -files "$MAPPER1","$REDUCER1" \
   -archives .venv.tar.gz#.venv \
   -mapper ".venv/bin/python mapper1.py" \

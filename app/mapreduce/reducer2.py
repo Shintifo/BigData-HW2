@@ -27,18 +27,17 @@ def process_key_data(key, data):
 	global total_docs, total_length, batch_counts
 
 	if key.startswith("DOC_"):
+		print("Here")
 		doc_id = int(key.split("_")[-1])
 		doc_length = None
 		is_valid_doc = False
 
 		for value_type, value in data:
-			if value_type == "LEN":
-				doc_length = int(value)
-				is_valid_doc = True
+			doc_length = int(value)
 
-		if is_valid_doc and doc_length is not None:
-			batch_doc_stats.add(doc_stats_stmt, (doc_id, doc_length))
-			batch_counts['doc'] += 1
+		batch_doc_stats.add(doc_stats_stmt, (doc_id, doc_length))
+		batch_counts['doc'] += 1
+		print("Put into table")
 	else:
 		term = key
 		doc_frequency = 0
@@ -104,4 +103,5 @@ if __name__ == "__main__":
 	if current_key is not None:
 		process_key_data(current_key, key_data[current_key])
 
+	flush_batches(True)
 	print("Reducer finished processing.")

@@ -18,8 +18,7 @@ venv-pack -o .venv.tar.gz
 # Collect data
 bash prepare_data.sh
 
-# Run the indexer
-bash index.sh /data/sample.txt
+bash index.sh /data
 
 # Run the ranker
-bash search.sh "this is a query!"
+bash search.sh "Weather forecast is the best thing"

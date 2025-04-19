@@ -8,11 +8,7 @@ def count_tf():
 		input_file = os.getenv('mapreduce_map_input_file', 'unknown_file')
 		filepath = input_file.strip()
 		name = filepath.split("/")[-1]
-		#TODO: fix
-		if name == "sample.txt":
-			id = 222
-		else:
-			id = int(filepath.split("_")[0])
+		id = int(name.split("_")[0])
 
 		tokens = re.findall(r'\w+', content.lower())
 		doc_len = len(tokens)
@@ -25,4 +21,7 @@ def count_tf():
 			print(f"{term}\t{id}\t{count}")
 
 if __name__ == "__main__":
+	# try:
 	count_tf()
+	# except Exception as e:
+	# 	print(e)
